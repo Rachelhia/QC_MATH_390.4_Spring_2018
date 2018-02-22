@@ -45,12 +45,8 @@ my_reverse = function(x){
   for(i in x){
     temp= c(i,temp)
   }
-#print(temp)
 temp
 }
-
-#my_reverse(v)
-#v
 
 ```
 
@@ -66,14 +62,9 @@ expect_equal(my_reverse(v), rev(v))
 ```{r}
 n = 50
 #TO-DO
-#vec= c(0,2,1,0)
-#vec
-#values=dunif(vec, 0, 2)
-#size=n*n, replace= TRUE, prob = NULL)
 values = c(rep(0,.5*n*n), rep(1, .25*n*n), rep(2,.25*n*n))
-#sample(values)
 R = matrix(sample(values), nrow = n, ncol = n)
-table(R)
+#table(R)
 #R
 
 
@@ -85,8 +76,8 @@ Test using the following and write two more tests as specified below:
 expect_equal(dim(R), c(n, n)) 
 #TO-DO test that the only unique values are 0, 1, 2
 expect_equal(n*n, sum(c(R)==0) + sum(c(R)==1) + sum(c(R)==2))  
-tab = table(R)
-tab[3]
+#tab = table(R)
+#tab[3]
 #TO-DO test that there are exactly 625 2's
 expect_equal(625,sum(c(R)==2)) #this is the test for 625 2's
 ```
@@ -95,27 +86,9 @@ expect_equal(625,sum(c(R)==2)) #this is the test for 625 2's
 
 ```{r}
 #TO-DO
-#X = matrix(NA, nrow = n, ncol = n)
-# rbinom(length(R), size = n*n, 0.3)
-#sample.int(sample(values), n*n, replace = TRUE, prob = 0.3)
-#bin = rbinom(R, size = n*n, 0.3)
-
-#R=replace(R,rbinom(R, size = n*n, 0.3),values = NA)
-#R= sample(R)
-#table(R)
 
 R[sample(x = n*n, size = n*n*0.3)] = NA
 
-
-# for(i in 1:n){
-#   for(j in 1:n){
-#     if (rbinom(1,1,0.3) ==1 ){
-#       R[i,j] = NA
-#     }
-#   }
-# }
-
-#R
 ```
 
 Test using the following code. Note this test may fail 1/100 times.
@@ -130,10 +103,6 @@ expect_gt(num_missing_in_R, qbinom(0.005, n^2, 0.3))
 
 ```{r}
 #TO-DO
-#typeof(R)
-#R = order( rowsum(R, group = row.names(R)) , reorder = TRUE, na.rm = FALSE)
-#R
-
 r_names = c()
 for (i in 1:n){
   r_names = c(r_names, sum(R[i,], na.rm = TRUE))
@@ -177,7 +146,6 @@ Find the 5%ile of `v` and use the `qnorm` function as part of a test to ensure i
 
 ```{r}
 #TO-DO
-#expect_equal(..., tol = )
 q1 = quantile(v,0.05)
 q2 = qnorm(p = .05, mean = -10, sd = sqrt(10))
 expect_equal(as.numeric(quantile(v,0.05)), expected = qnorm(0.05, mean = -10, sd = sqrt(10)), tolerance = 0.05)
@@ -189,9 +157,7 @@ Find the sample quantile corresponding to the value -7000 of `v` and use the `pn
 
 ```{r}
 #TO-DO
-#expect_equal(..., tol = )
 inverse_quantile_obj = ecdf(v)
-#inverse_quantile_obj(-7000)
 expect_equal(inverse_quantile_obj(-7000),pnorm(-7000, mean = -10, sd = sqrt(10)), tol = 0.05)
 ```
 
@@ -201,21 +167,13 @@ expect_equal(inverse_quantile_obj(-7000),pnorm(-7000, mean = -10, sd = sqrt(10))
 
 ```{r}
 #TO-DO
-#my_list = {"A", "B"} 
-#use repeat 
-#mylist$A = array(3, dim = c(3,3,3))
 n=8
 key = 'A'
 my_list = list()
 keys = c("A", "B", "C", "D", "E", "F", "G", "H")
 for(i in 1:n){
- # for(j in 1:n){
-    #my_list[seq('a',i, by =1)]
-   #my_list[rep(seq('A',i, by =1))]
   key = keys[i]  
   my_list[[key]] = array(seq(1,i), dim = c(rep(i,i)))
-    
-  #}
 }
 
 
@@ -275,36 +233,7 @@ The outcome metric is `Species`. This is what we will be trying to predict. Howe
 
 f = iris[iris$Species != "virginica", ]
 
-View(f)
-
-
-#f = f[f$Species %in% c("setosa", "versicolor") ]
-
-
-
-
-#flower = droplevels.data.frame(iris, except = NULL,"virginica")
-#View(flower)
-#flower[rowSums(is.na(flower)) == 0,]
-# iris_copy  = iris
-# index = 1
-# for(i in iris_copy$Species){
-#   if (i != "virginica") {
-#     #iris_copy$Species[i]= NULL
-#     rbind(iris_copy, iris_copy[i, ])
-#     index = index +1
-#   }
-# }
-# na.omit(iris_copy)
-# summary(iris_copy)
-
-#rm(list=ls())
-
-
-#D = as.matrix(cbind(1, iris[, , drop = TRUE]))
-#head(D)
-#summary(D)
-
+#View(f)
 
 
 ```
@@ -313,7 +242,12 @@ Now create a vector `y` that is length the number of remaining rows in the data 
              
 ```{r}
 #TO-DO
-if()
+y = nrow (f)
+for( i in 1: nrow(f)){
+  if(f$Species[i] == "setosa"){
+  y[i] = 0} else y[i]=1
+}
+y
 
 
 ```
@@ -326,7 +260,27 @@ if()
 #make the best possible cutoff to predict 1 or 0
 #go through every data point in the set, find the one with the lowest amount of errors
 
-y_binary = as.numeric(iris_copy$Sepal.Length == "long")
+#y_binary = as.numeric(f$Sepal.Length)
+
+#y_binary = ifelse(y_binary == 1, 0, 1)
+X1 = as.matrix(cbind(f[, 1, drop = FALSE]))
+MAX_ITER = 100
+w_vec = 0 #rep(0, 2)
+#w_vec = y
+for (iter in 1 : MAX_ITER){  
+  for (i in 1 : nrow(X1)){
+    x_i = X1[i]
+    yhat_i = ifelse(sum(x_i * w_vec) > 0, 1, 0)
+    y_i = y[i]
+    w_vec = w_vec + (y_i - yhat_i) * x_i
+  }
+}
+
+#plot(iris$Sepal.Length)
+
+#error rate
+yhat = ifelse(X1 %*% w_vec > 0, 1, 0)
+sum(y != yhat) / length(y)
 
 
 ```
@@ -335,16 +289,42 @@ Does this make sense given the following summaries:
 
 ```{r}
 summary(iris[iris$Species == "setosa", "Sepal.Length"])
-summary(iris[iris$Species == "virginica", "Sepal.Length"])
+summary(iris[iris$Species == "versicolor", "Sepal.Length"])
 ```
 
 Write your answer here in English.
+Yes. The summaries provide us enough information to be able to visualize the line between the two sets of Sepal.length data, setosa and versicolor. The min and max's for each are similar, meaning there would be some error because the data is not linearly separable. Plotting the Sepal.length data will show you that it is not linear separable. Using just Sepal.length is not a good enough way to identify species.
+
 
 10. Fit a perceptron model explaining `y` using all three features. Try to write your own code to do this. Provide the estimated parameters (i.e. the four entries of the weight vector)? What is the total number of errors this model makes?
 
 ```{r}
 #TO-DO - use all 4 features - if 0 it may be separable
 #code perceptron learning algorithm and get w as a result
+
+
+X2 = as.matrix(
+cbind(y, f[, 1, drop = FALSE], f[, 2, drop = FALSE], f[, 3, drop = FALSE], f[, 4, drop = FALSE]))
+MAX_ITER = 100
+w_vec = rep(0, 5)
+#w_vec = y
+for (iter in 1 : MAX_ITER){  
+  for (i in 1 : nrow(X2)){
+    x_i = X2[i,]
+    yhat_i = ifelse(sum(x_i * w_vec) > 0, 1, 0)
+    y_i = y[i]
+    w_vec = w_vec + (y_i - yhat_i) * x_i
+  }
+}
+#w_vec
+
+
+#error rate
+yhat = ifelse(X2 %*% w_vec > 0, 1, 0)
+sum(y != yhat) / length(y)
+
+#The 4 features together make it separable.
+
 
 ```
 
