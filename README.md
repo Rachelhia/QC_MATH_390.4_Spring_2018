@@ -4,3 +4,6 @@
 
 2. Homework 2
 * HW2P [PDF](https://github.com/Rachelhia/QC_MATH_390.4_Spring_2018/blob/master/hw02p-rachelhia.pdf) [Rmd](https://github.com/Rachelhia/QC_MATH_390.4_Spring_2018/blob/master/hw02p-rachelhia.Rmd)
+
+3. Homework 3
+* HW3P [PDF](https://github.com/Rachelhia/QC_MATH_390.4_Spring_2018/blob/master/hw03p-rachelhia.pdf) [Rmd](https://github.com/Rachelhia/QC_MATH_390.4_Spring_2018/blob/master/hw03p-rachelhia.Rmd)
